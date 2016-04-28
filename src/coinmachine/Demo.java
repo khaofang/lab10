@@ -60,9 +60,17 @@ public class Demo {
 		final int capacity = 10;  // how many coins the machine can hold
 		
 		CoinMachine machine = new CoinMachine( capacity );
+		CoinAcceptingUI coinAcceptingFrame = new CoinAcceptingUI();
+		CoinMachineUI coinStatusFrame = new CoinMachineUI();
 		Demo demo = new Demo();
-		//TODO add observers
+		machine.addObserver(new CoinMachineObserver());
+		machine.addObserver(coinAcceptingFrame);
+		machine.addObserver(coinStatusFrame);
+		
+		coinAcceptingFrame.run();
+		
 		demo.insertDialog(machine);
+		
 	}
 }
 

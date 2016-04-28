@@ -1,6 +1,7 @@
 package coinmachine;
 import java.util.Collections;
 import java.util.List;
+import java.util.Observable;
 
 /** 
  *  A coin purse contains coins.
@@ -9,7 +10,7 @@ import java.util.List;
  *  and withdrawing coins.
  *  @author BTS and MRT
  */
-public class CoinMachine {
+public class CoinMachine extends Observable {
 	/** the coins it contains */
 	private List<Coin> coins;
 	/** max number of coins you can put in the machine */
@@ -21,6 +22,7 @@ public class CoinMachine {
 	public CoinMachine( int capacity ) {
 		this.capacity = capacity;
 		coins = new java.util.ArrayList<Coin>( );
+		addObserver(new CoinMachineObserver());
 	}
 
 	/** 
@@ -60,7 +62,8 @@ public class CoinMachine {
 		if ( isFull() ) return false;
 		if (m.getValue() <= 0) throw new IllegalArgumentException("Coin must have positive value");
 		boolean result = coins.add(m);
-		//TODO notify observers
+		super.setChanged();
+		super.notifyObservers(coins);
 		return result;
 	}
 	
