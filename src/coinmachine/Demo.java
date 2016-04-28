@@ -61,13 +61,14 @@ public class Demo {
 		
 		CoinMachine machine = new CoinMachine( capacity );
 		CoinAcceptingUI coinAcceptingFrame = new CoinAcceptingUI();
-		CoinMachineUI coinStatusFrame = new CoinMachineUI();
+		CoinMachineUI coinStatusFrame = new CoinMachineUI(machine);
 		Demo demo = new Demo();
 		machine.addObserver(new CoinMachineObserver());
 		machine.addObserver(coinAcceptingFrame);
 		machine.addObserver(coinStatusFrame);
 		
 		coinAcceptingFrame.run();
+		coinStatusFrame.run();
 		
 		demo.insertDialog(machine);
 		

@@ -13,9 +13,9 @@ import javax.swing.JTextField;
 
 public class CoinAcceptingUI extends JFrame implements Observer {
 
-	JLabel labelCoins, labelAcceptingCoins;
-	JPanel panelShowCoins,panelAcceptingCoins;
-	JTextField fieldNumCoins;
+	private JLabel labelCoins, labelAcceptingCoins;
+	private JPanel panelShowCoins,panelAcceptingCoins;
+	private JTextField fieldNumCoins;
 	
 	public CoinAcceptingUI() {
 		this.setTitle("Coin Acceting");
