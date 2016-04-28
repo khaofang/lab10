@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.BorderFactory;
@@ -49,7 +50,9 @@ public class CoinMachineUI extends JFrame implements Observer {
 		panelInserting.setLayout(new FlowLayout());
 		labelBalance = new JLabel("Balance: 0");
 		labelStatus = new JLabel("Status:");
-		barCoinStatus = new JProgressBar();
+		barCoinStatus = new JProgressBar(0, machine.getCapacity());
+		barCoinStatus.setStringPainted(true);
+		barCoinStatus.setString("0");
 		borderCoinButton = BorderFactory.createTitledBorder("Insert Money");
 		borderCoinButton.setTitleJustification(TitledBorder.LEFT);
 		button1Baht = new JButton(image_1baht_png);
@@ -66,9 +69,9 @@ public class CoinMachineUI extends JFrame implements Observer {
 		panelInserting.add(button5Baht);
 		panelInserting.add(button10Baht);
 		
-		button1Baht.addActionListener(new Add1BahtCoinListener());
-		button5Baht.addActionListener(new Add5BahtCoinListener());
-		button10Baht.addActionListener(new Add10BahtCoinListener());
+		button1Baht.addActionListener(new InsertMoneyListener(1));
+		button5Baht.addActionListener(new InsertMoneyListener(5));
+		button10Baht.addActionListener(new InsertMoneyListener(10));
 	}
 	
 	public void run() {
@@ -77,27 +80,21 @@ public class CoinMachineUI extends JFrame implements Observer {
 	}
 
 	@Override
-	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
+	public void update(Observable subject, Object info) {
+		barCoinStatus.setValue(((List<Coin>) info).size());
+		barCoinStatus.setString(String.valueOf(((List<Coin>) info).size()));
 		
 	}
 	
-	class Add1BahtCoinListener implements ActionListener {
+	class InsertMoneyListener implements ActionListener {
+		private int money;
+		
+		public InsertMoneyListener(int money) {
+			this.money = money;
+		}
+		
 		public void actionPerformed(ActionEvent evt) {
-			machine.insert(new Coin(1));
+			machine.insert(new Coin(money));
 		}	
 	}
-	
-	class Add5BahtCoinListener implements ActionListener {
-		public void actionPerformed(ActionEvent evt) {
-			machine.insert(new Coin(5));
-		}	
-	}
-	
-	class Add10BahtCoinListener implements ActionListener {
-		public void actionPerformed(ActionEvent evt) {
-			machine.insert(new Coin(10));
-		}	
-	}
-	
 }
