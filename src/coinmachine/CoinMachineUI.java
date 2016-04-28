@@ -3,6 +3,8 @@ package coinmachine;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
@@ -63,6 +65,10 @@ public class CoinMachineUI extends JFrame implements Observer {
 		panelInserting.add(button1Baht);
 		panelInserting.add(button5Baht);
 		panelInserting.add(button10Baht);
+		
+		button1Baht.addActionListener(new Add1BahtCoinListener());
+		button5Baht.addActionListener(new Add5BahtCoinListener());
+		button10Baht.addActionListener(new Add10BahtCoinListener());
 	}
 	
 	public void run() {
@@ -74,6 +80,24 @@ public class CoinMachineUI extends JFrame implements Observer {
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	class Add1BahtCoinListener implements ActionListener {
+		public void actionPerformed(ActionEvent evt) {
+			machine.insert(new Coin(1));
+		}	
+	}
+	
+	class Add5BahtCoinListener implements ActionListener {
+		public void actionPerformed(ActionEvent evt) {
+			machine.insert(new Coin(5));
+		}	
+	}
+	
+	class Add10BahtCoinListener implements ActionListener {
+		public void actionPerformed(ActionEvent evt) {
+			machine.insert(new Coin(10));
+		}	
 	}
 	
 }
