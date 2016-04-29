@@ -11,18 +11,28 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * Make GUI of counting of coin accepting .
+ * Show that how many coins that machine receives.
+ * If machine receives coins to it capacity, it will show that it is full, and can't add coin to it then.
+ * @author Chayanin Punjakunaporn
+ *
+ */
 public class CoinAcceptingUI extends JFrame implements Observer {
 
+	/** Attribute */
 	private JLabel labelCoins, labelAcceptingCoins;
 	private JPanel panelShowCoins,panelAcceptingCoins;
 	private JTextField fieldNumCoins;
 	
+	/** Constructor, initial this GUI. */
 	public CoinAcceptingUI() {
 		this.setTitle("Coin Acceting");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		initComponents();
 	}
 
+	/** Initial all of components in GUI. */
 	public void initComponents() {
 		this.setLayout(new GridLayout(2,1));
 
@@ -34,7 +44,7 @@ public class CoinAcceptingUI extends JFrame implements Observer {
 		labelCoins = new JLabel("#Coins: ");
 		labelAcceptingCoins = new JLabel("Accepting Coins");
 		labelAcceptingCoins.setForeground(Color.GREEN);
-		fieldNumCoins = new JTextField("0",6);
+		fieldNumCoins = new JTextField("0", 4);
 		fieldNumCoins.setEditable(false);
 
 		this.add(panelShowCoins);
@@ -44,11 +54,15 @@ public class CoinAcceptingUI extends JFrame implements Observer {
 		panelAcceptingCoins.add(labelAcceptingCoins);
 	}
 
+	/** Run this GUI. */
 	public void run() {
 		this.pack();
 		this.setVisible(true);
 	}
 
+	/** Update by this class's observer. 
+	 *  Update a number of coins that be counted from machine, and show on text field in GUI.
+	 */
 	@Override
 	public void update(Observable subject, Object info) {
 		fieldNumCoins.setText(String.valueOf(((List<Coin>) info).size()));
@@ -56,8 +70,6 @@ public class CoinAcceptingUI extends JFrame implements Observer {
 			labelAcceptingCoins.setText("Full");
 			labelAcceptingCoins.setForeground(Color.RED);
 		}
-		
-		
 	}
 
 }
