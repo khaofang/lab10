@@ -81,9 +81,13 @@ public class CoinMachineUI extends JFrame implements Observer {
 
 	@Override
 	public void update(Observable subject, Object info) {
+		int balanceUpdate = 0;
 		barCoinStatus.setValue(((List<Coin>) info).size());
 		barCoinStatus.setString(String.valueOf(((List<Coin>) info).size()));
-		
+		for(int i=0 ; i<((List<Coin>) info).size() ; i++){
+			balanceUpdate += ((List<Coin>) info).get(i).getValue();
+		}
+		labelBalance.setText("Balance: " + String.valueOf(balanceUpdate));
 	}
 	
 	class InsertMoneyListener implements ActionListener {
