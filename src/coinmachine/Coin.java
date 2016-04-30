@@ -1,4 +1,5 @@
 package coinmachine;
+
 /**
  * A Coin represents metalic money with a value.
  */
@@ -15,41 +16,42 @@ public class Coin implements Comparable<Coin> {
 	public Coin(int value) {
 		this(value, "Baht");
 	}
-	
+
 	public Coin(int value, String currency) {
-		assert value > 0;  // if not, its YOUR fault
-		if (currency == null) throw new IllegalArgumentException("currency cannot be null");
+		assert value > 0; // if not, its YOUR fault
+		if (currency == null)
+			throw new IllegalArgumentException("currency cannot be null");
 		this.value = value;
 		this.currency = currency;
 	}
+
 	/**
-	 * Get the coin's value.
+	 * Get the coin's value. 
 	 * @return the value of this coin.
 	 */
 	public int getValue() {
 		return value;
 	}
-	
+
 	/**
 	 * Get the coin's currency.
 	 * @return the currency of this coin.
 	 */
-	public String getCurrency() { return currency; }
-	
+	public String getCurrency() {
+		return currency;
+	}
 
 	/**
-	 * Hashcode is used by collections like HashSet and HashMap.
-	 * It should be a value that is unlikely to change and
-	 * usually returns different hash values for objects with
-	 * different attribute values.
+	 * Hashcode is used by collections like HashSet and HashMap. It should be a
+	 * value that is unlikely to change and usually returns different hash
+	 * values for objects with different attribute values. 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((currency == null) ? 0 : currency.hashCode());
+		result = prime * result + ((currency == null) ? 0 : currency.hashCode());
 		result = prime * result + value;
 		return result;
 	}
@@ -61,9 +63,9 @@ public class Coin implements Comparable<Coin> {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof Coin) {
+		if (obj instanceof Coin) {
 			Coin coinObj = (Coin) obj;
-			if(this.value == coinObj.value && this.currency == coinObj.currency)
+			if (this.value == coinObj.value && this.currency == coinObj.currency)
 				return true;
 		}
 		return this == obj;
@@ -74,6 +76,6 @@ public class Coin implements Comparable<Coin> {
 	 */
 	@Override
 	public String toString() {
-		return value+"-"+currency;
+		return value + "-" + currency;
 	}
 }
