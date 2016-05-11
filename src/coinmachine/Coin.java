@@ -63,17 +63,14 @@ public class Coin implements Comparable<Coin> {
 	 */
 	@Override
 	public boolean equals(Object obj) {
+		if (obj == null) return false;
 		if (obj instanceof Coin) {
 			Coin other = (Coin) obj;
 			if (this.value == other.value && this.currency.equals(other.currency))
 				return true;
 		}
-		// Protect coin call toString() when obj equals to coin.toString().
-		// the last line of this method it will call coin.toString() that it will make coin equals to String of coin.toString() automatically.
-		else if (obj instanceof String) return false;
+		return false;
 		
-		if (obj == null) return false;
-		return this.toString().equals(obj.toString());
 	}
 
 	/**
