@@ -61,7 +61,6 @@ public class CoinAcceptingUI extends JFrame implements Observer {
 	/**
 	 * Update by this class's observer. Update a number of coins that be counted
 	 * from machine, and show on text field in GUI.
-	 * 
 	 */
 	@Override
 	public void update(Observable subject, Object info) {
@@ -71,5 +70,4 @@ public class CoinAcceptingUI extends JFrame implements Observer {
 			labelAcceptingCoins.setForeground(Color.RED);
 		}
 	}
-
 }
